@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Js2Android1Activity"></activity>
+        <activity android:name=".JS2Android2Activity"></activity>
+        <activity android:name=".Js2Android1Activity" />
         <activity android:name=".Android2JS2Activity" />
         <activity android:name=".Android2Js1Activity" />
         <activity android:name=".ListJSWebViewActivity">
