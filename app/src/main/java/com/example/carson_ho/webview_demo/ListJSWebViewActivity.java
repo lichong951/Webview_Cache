@@ -66,6 +66,7 @@ public class ListJSWebViewActivity extends AppCompatActivity implements View.OnC
                 JS2Android2Activity.actionStart(this);
                 break;
             case R.id.btn_js_2_android_3:
+                JS2AndroidActivity3.actionStart(this);
                 break;
         }
     }
