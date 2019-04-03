@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ListJSWebViewActivity">
+
+    <Button
+        android:id="@+id/btn_android_2_js_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Android去调用JS的代码(1)" />
+
+    <Button
+        android:id="@+id/btn_android_2_js_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Android去调用JS的代码(2)" />
+
+    <Button
+        android:id="@+id/btn_js_2_android_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JS通过WebView调用 Android 代码(1)" />
+
+    <Button
+        android:id="@+id/btn_js_2_android_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JS通过WebView调用 Android 代码(2)" />
+
+    <Button
+        android:id="@+id/btn_js_2_android_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JS通过WebView调用 Android 代码(3)" />
+
+
+</LinearLayout>

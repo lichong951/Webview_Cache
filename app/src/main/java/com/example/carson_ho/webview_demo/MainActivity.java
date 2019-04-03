@@ -23,11 +23,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        mWebview = (WebView) findViewById(R.id.webView1);
-        beginLoading = (TextView) findViewById(R.id.text_beginLoading);
-        endLoading = (TextView) findViewById(R.id.text_endLoading);
-        loading = (TextView) findViewById(R.id.text_Loading);
-        mtitle = (TextView) findViewById(R.id.title);
+        mWebview = findViewById(R.id.webView1);
+        beginLoading = findViewById(R.id.text_beginLoading);
+        endLoading =  findViewById(R.id.text_endLoading);
+        loading = findViewById(R.id.text_Loading);
+        mtitle = findViewById(R.id.title);
 
         mWebSettings = mWebview.getSettings();
 
