@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,6 +16,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
 
+/**
+ * 1、因为该方法的执行不会使页面刷新，而第一种方法（loadUrl ）的执行则会。
+ * 2、 Android 4.4 后才可使用
+ */
 public class Android2JS2Activity extends AppCompatActivity implements View.OnClickListener {
 
     /**
@@ -36,7 +41,7 @@ public class Android2JS2Activity extends AppCompatActivity implements View.OnCli
     }
 
     private void initView() {
-        mBtnAndroid2Js =  findViewById(R.id.btn_android_2_js);
+        mBtnAndroid2Js = findViewById(R.id.btn_android_2_js);
         mBtnAndroid2Js.setOnClickListener(this);
         mWebView = findViewById(R.id.web_view);
 
@@ -87,15 +92,29 @@ public class Android2JS2Activity extends AppCompatActivity implements View.OnCli
                         // 注意调用的JS方法名要对应上
                         // 调用javascript的callJS()方法
                         // 只需要将第一种方法的loadUrl()换成下面该方法即可
-                        String data="Hello World！";
-                        mWebView.evaluateJavascript("javascript:callJS2('"+data+"')", new ValueCallback<String>() {
+                        String data = "Hello World！";
+                        mWebView.evaluateJavascript("javascript:callJS2('" + data + "')", new ValueCallback<String>() {
                             @Override
                             public void onReceiveValue(String s) {
-                                Log.d("Android2Js",String.valueOf(s));
+                                Log.d("Android2Js", String.valueOf(s));
                             }
                         });
                     }
                 });
+
+//                        // Android版本变量
+//                        final int version = Build.VERSION.SDK_INT;
+//// 因为该方法在 Android 4.4 版本才可使用，所以使用时需进行版本判断
+//                        if (version < 18) {
+//                            mWebView.loadUrl("javascript:callJS()");
+//                        } else {
+//                            mWebView.evaluateJavascript("javascript:callJS()", new ValueCallback<String>() {
+//                                @Override
+//                                public void onReceiveValue(String value) {
+//                                    //此处为 js 返回的结果
+//                                }
+//                            });
+//                        }
 
                 break;
         }
