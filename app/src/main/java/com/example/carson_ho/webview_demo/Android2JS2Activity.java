@@ -6,18 +6,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.webkit.JsResult;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Button;
-/**
- * 特别注意：JS代码调用一定要在 onPageFinished（） 回调之后才能调用，否则不会调用。
- * onPageFinished()属于WebViewClient类的方法，主要在页面加载结束时调用
- */
-public class Android2Js1Activity extends AppCompatActivity implements View.OnClickListener {
 
+public class Android2JS2Activity extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * 点我调用JS
@@ -26,14 +24,14 @@ public class Android2Js1Activity extends AppCompatActivity implements View.OnCli
     private WebView mWebView;
 
     public static void actionStart(Context context) {
-        Intent intent = new Intent(context, Android2Js1Activity.class);
+        Intent intent = new Intent(context, Android2JS2Activity.class);
         context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_android2_js1);
+        setContentView(R.layout.activity_android2_js2);
         initView();
     }
 
@@ -41,6 +39,7 @@ public class Android2Js1Activity extends AppCompatActivity implements View.OnCli
         mBtnAndroid2Js =  findViewById(R.id.btn_android_2_js);
         mBtnAndroid2Js.setOnClickListener(this);
         mWebView = findViewById(R.id.web_view);
+
         WebSettings webSettings = mWebView.getSettings();
         // 设置与Js交互的权限
         webSettings.setJavaScriptEnabled(true);
@@ -50,6 +49,7 @@ public class Android2Js1Activity extends AppCompatActivity implements View.OnCli
         // 格式规定为:file:///android_asset/文件名.html
         mWebView.loadUrl("file:///android_asset/android_2_js1.html");
 
+
         // 由于设置了弹窗检验调用结果,所以需要支持js对话框
         // webview只是载体，内容的渲染需要使用webviewChromClient类去实现
         // 通过设置WebChromeClient对象处理JavaScript的对话框
@@ -57,7 +57,7 @@ public class Android2Js1Activity extends AppCompatActivity implements View.OnCli
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
-                AlertDialog.Builder b = new AlertDialog.Builder(Android2Js1Activity.this);
+                AlertDialog.Builder b = new AlertDialog.Builder(Android2JS2Activity.this);
                 b.setTitle("Alert");
                 b.setMessage(message);
                 b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -86,9 +86,17 @@ public class Android2Js1Activity extends AppCompatActivity implements View.OnCli
                     public void run() {
                         // 注意调用的JS方法名要对应上
                         // 调用javascript的callJS()方法
-                        mWebView.loadUrl("javascript:callJS()");
+                        // 只需要将第一种方法的loadUrl()换成下面该方法即可
+                        String data="Hello World！";
+                        mWebView.evaluateJavascript("javascript:callJS2('"+data+"')", new ValueCallback<String>() {
+                            @Override
+                            public void onReceiveValue(String s) {
+                                Log.d("Android2Js",String.valueOf(s));
+                            }
+                        });
                     }
                 });
+
                 break;
         }
     }
